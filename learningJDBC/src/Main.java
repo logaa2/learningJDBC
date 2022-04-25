@@ -1,5 +1,21 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/girrafe", "root", "Recuerdam1");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM employee");
+
+            while(resultSet.next()){
+                System.out.println(resultSet.getString("first_name"));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
